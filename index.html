@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <!-- Autores: Guillermo Soanes y Danna Gonzalez -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="./css/estilos.css">
+        <title>Regalos especiales</title>
+    </head>
+    <body>
+        <header class="encabezado">
+                <h1>
+                    Regalos especiales
+                </h1>
+                <h3>Sitio desarollado por <a href="https://www.ort.edu.uy/" target="_blank">Guillermo Soanes (Nro 327900)</a> y <a href="https://www.ort.edu.uy/" target="_blank">Danna Gonzalez (Nro 284727 )</a></h3>
+        </header>
+        <nav class="navegacion">
+            <p>
+                <a class="opciones_nav" href="#Informes">Informes</a>
+                <a class="opciones_nav" href="#Gest_categorias">Gestion de categorías</a>
+                <a class="opciones_nav" href="#Gest_exps">Gestion de experiencias</a>
+            </p>
+        </nav>
+        <section class="categoria">
+            <h3>
+                Categorías
+            </h3>
+            <select name="select">
+                <option value="value1" label=" " selected></option>
+            </select>
+            <h3>
+                Cantidad de Personas
+            </h3>
+            <select name="select">
+                <option value="Todos"  selected>Todos</option>
+                <option value="1 persona">1 persona</option>
+                <option value="2 personas">2 personas</option>
+                <option value="Más de 2 personas">Más de 2 personas</option>
+            </select>
+            <h3>
+                Orden de Precios
+            </h3>
+            <select name="select">
+                <option value="Creciente" selected>Creciente</option>
+                <option value="Decreciente">Decreciente</option>
+            </select>
+        </section>
+        <section class="experiencia">
+            <h3>
+                Experiencias
+            </h3>
+            <p>Sin datos</p>
+            <h3>
+                !Comprar¡
+            </h3>
+            <p>Experiencia</p>
+            <p>Sin datos</p>
+            <form>
+                <label for="idNombre_compador">Nombre Comprador:</label>
+                <input type="text" id="idNombre_compador" required>
+                <label for="idMail">Mail:</label>
+                <input type="text" id="idMail" required>
+                <button disabled>Comprar</button>
+            </form>        
+        </section>
+        <section class="info" id="Informes">
+            <h3>
+                Informes
+            </h3>
+            <p>Monto de la experiencia/s más cara/s</p>
+            <p>Sin datos</p>
+            <p>Experiencia/s más veces comprada</p>
+            <details>
+                <summary>Detallede compras de la categoria seleccionada</summary>
+                <p>Compras realizadas</p>
+                <ul>
+                    <li>Sin datos</li>
+                </ul>
+            </details>
+        </section>
+        <section class="gest_categorias" id="Gest_categorias">
+            <h3>
+                Gestion de Categorías
+            </h3>
+            <form>
+                <label for="id_nombre_categoria">Nombre de la categoria</label>
+                <input type="text" id="id_nombre_categoria" required>
+                <label for="id_detalle_categoria">Detalles de la categoria</label>
+                <input type="text" id="id_detalle_categoria" required>
+                <button>Agregar</button>
+            </form>
+            <br>
+            <form>
+                <label for="borrar_cat">Seleccionar categoria a borrar:</label>
+                <select id="borrar_cat" name="select">
+                    <option value="" label=" " selected></option>
+                </select>
+                <button disabled>Eliminar</button>
+            </form>
+        </section>
+        <section class="gest_exps" id="Gest_exps">
+            <h3>Gestion de Experiencia</h3>
+            <form>
+                <label for="id_titulo_experiencia">Titulo de la experiencia</label>
+                <input type="text" id="id_titulo_experiencia" required>
+                <label for="id_descripcion">Descripcion</label>
+                <input type="text" id="id_descripcion" required>
+                <label for="id_precio">Precio</label>
+                <input type="text" id="id_precio" required>
+                <label>Cantidad</label>
+                <select name="select">
+                    <option value="Todos" label="Todos" selected>Todos</option>
+                    <option value="1 persona" label="1 persona">1 persona</option>
+                    <option value="2 personas" label="2 personas">2 personas</option>
+                    <option value="Más de 2 personas" label="Más de 2 personas">Más de 2 personas</option>
+                </select>
+                <label for="id_precio">Categoria</label>
+                <select name="select">
+                    <option value="" label=" " selected></option>
+                </select>
+                <button disabled>Agregar</button>
+            </form>
+            <br>
+            <form>
+                <label>Seleccionar experiencia a borrar:</label>
+                <select name="select">
+                    <option value="" label=" " selected></option>
+                </select>
+                <button disabled>Eliminar</button>
+            </form>
+        </section>
+        <footer class="pie">
+            <p>
+                Sitio desarrollado por Danna Gonzalez (284727) y Guillermo Soanes (327900) - Universidad ORT
+            </p>
+        </footer>
+    
+    </body>
+</html>

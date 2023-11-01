@@ -1,0 +1,56 @@
+/*Autores: Guillermo Soanes y Danna Gonzalez*/
+body {
+    margin: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.encabezado {
+    text-align: center;
+}
+.navegacion {
+    text-align: right;
+    background-color: #40404E;
+    padding: 0.5%;
+}
+.opciones_nav {
+    text-decoration: none;
+    color: white;
+    margin: 0.5%;
+}
+.categoria {
+    background-color: #E6DCEB;
+    float: left;
+    padding: 0.5%;
+    padding-right: 10%;
+    margin: 0.5%;
+    width: 10%;
+}
+.experiencia {
+    float: left;
+    margin: 0.5%;
+    padding-left: 10%;
+    width: 30%;
+}
+.info {
+    clear: both;
+    margin: 0.5%;
+    background-color: #C0C0C0 ;
+    padding-top: 0.1%;
+    padding-bottom: 0.3%;
+}
+.gest_categorias {
+    margin: 0.5%;
+    background-color: #FDDA9C;
+    padding-top: 0.1%;
+    padding-bottom: 0.3%;
+}
+.gest_exps {
+    margin: 0.5%;
+    background-color: #F29F05;
+    padding-top: 0.1%;
+    padding-bottom: 0.3%;
+}
+.pie {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
