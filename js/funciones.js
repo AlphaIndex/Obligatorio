@@ -4,6 +4,8 @@ let miSistemas = new Sistema();
 
 function inicio () {
     document.getElementById("idBotonAgregarCategoria").addEventListener("click", agregarCategorias);
+    document.getElementById("idBotonAltaExperiencia").addEventListener("click", agregarExperiencia);
+    document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
 }
 function agregarCategorias() {
     let from = document.getElementById("idFormCategoria");
