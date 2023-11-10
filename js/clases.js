@@ -38,7 +38,7 @@ class Categoria {
     toString () {
         return "Nombre: " + this.nombre + "Detalle: " + this.detalles;
     }
-    
+
 }
 class Experiencias {
     constructor(titulo_exp, descripcion_exp, precio_exp, cantidad_exp, categoria_exp) {
@@ -49,7 +49,7 @@ class Experiencias {
         this.categoria = categoria_exp;
     }
     toString () {
-        return "Titulo: " + this.titulo + "Descripcion: " + this.descripcion + "Precio: " + this.precio;
+        return "Titulo: " + this.titulo + "Descripcion: " + this.descripcion + "Precio: " + this.precio + "Cantidad: " + this.cantidad + "Categoria: " + this.categoria;
     }
 }
 class Compra {
@@ -58,6 +58,6 @@ class Compra {
         this.mail = mail_compra;
     }
     toString () {
-        return "Nombre: " + this.nombre + "Detalle: " + this.detalles;
+        return "Nombre: " + this.nombre + "Mail: " + this.mail;
     }
 }

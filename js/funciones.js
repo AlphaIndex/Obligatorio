@@ -9,14 +9,14 @@ function inicio () {
 }
 
 function agregarCategorias() {
-    let from = document.getElementById("idFormCategoria");
-    if (from.reportValidity()) {
+    let form = document.getElementById("idFormCategoria");
+    if (form.reportValidity()) {
         let cat_nombre = document.getElementById("idNombreCategoria").value;
         let cat_detalles = document.getElementById("idDetallesCategoria").value;
         let categoria = new Categoria(cat_nombre, cat_detalles);
         miSistemas.nuevaCategoria(categoria);
-        from.reset();
         mostrarCategoria();
+        form.reset();
     }
 } 
 
@@ -47,13 +47,23 @@ function agregarCompra() {
 }
 
 function mostrarCategoria() {
-    let cate = document.getElementById("idComboCategoriasIzquierda");
-    cate.innerHTML = "";
+    let cateAlta = document.getElementById("idComboCategoriasIzquierda");
+    let cateBaja = document.getElementById("idComboCategoriasAbajo");
+    let cateExp = document.getElementById("idCategoriaExperiencia");
+    cateAlta.innerHTML = "";
+    cateBaja.innerHTML = "";
+    cateExp.innerHTML = "";
     let datos = miSistemas.darCategoria();
     for(let i of datos) {
-        let nodo = document.createElement("option");
-        let nodoT = document.createTextNode(i.nombre);
-        nodo.appendChild(nodoT)
-        cate.appendChild(nodo)
+        cateAlta.appendChild(addNodo("option", i.nombre));
+        cateBaja.appendChild(addNodo("option", i.nombre));
+        cateExp.appendChild(addNodo("option", i.nombre));
     }
+}
+
+function addNodo(tipo, texto) {
+    let nodo = document.createElement(tipo);
+    let nodoT = document.createTextNode(texto);
+    nodo.appendChild(nodoT);
+    return nodo;
 }
