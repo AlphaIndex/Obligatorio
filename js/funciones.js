@@ -7,6 +7,7 @@ function inicio () {
     document.getElementById("idBotonAltaExperiencia").addEventListener("click", agregarExperiencia);
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
 }
+
 function agregarCategorias() {
     let from = document.getElementById("idFormCategoria");
     if (from.reportValidity()) {
@@ -15,8 +16,10 @@ function agregarCategorias() {
         let categoria = new Categoria(cat_nombre, cat_detalles);
         miSistemas.nuevaCategoria(categoria);
         from.reset();
+        mostrarCategoria();
     }
 } 
+
 function agregarExperiencia() {
     let form = document.getElementById("idFormExperiencia");
     if (form.reportValidity()){
@@ -30,6 +33,7 @@ function agregarExperiencia() {
         form.reset();
     }
 }
+
 function agregarCompra() {
     let form = document.getElementById("idFormCompra");
     if (form.reportValidity()){
@@ -38,5 +42,18 @@ function agregarCompra() {
         let compra = new Compra (com_nombre, com_mail);
         miSistemas.nuevaCompra(compra);
         form.reset();
+    }
+
+}
+
+function mostrarCategoria() {
+    let cate = document.getElementById("idComboCategoriasIzquierda");
+    cate.innerHTML = "";
+    let datos = miSistemas.darCategoria();
+    for(let i of datos) {
+        let nodo = document.createElement("option");
+        let nodoT = document.createTextNode(i.nombre);
+        nodo.appendChild(nodoT)
+        cate.appendChild(nodo)
     }
 }
