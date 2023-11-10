@@ -28,6 +28,9 @@ class Sistema {
     darCategoria() {
         return this.list_categorias;
     }
+    eliminarCategoria(pocicion){
+        this.list_categorias.splice(pocicion, 1);
+    }
 
 }
 class Categoria {

@@ -6,6 +6,7 @@ function inicio () {
     document.getElementById("idBotonAgregarCategoria").addEventListener("click", agregarCategorias);
     document.getElementById("idBotonAltaExperiencia").addEventListener("click", agregarExperiencia);
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
+    document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria)
 }
 
 function agregarCategorias() {
@@ -18,6 +19,7 @@ function agregarCategorias() {
         mostrarCategoria();
         form.reset();
     }
+    document.getElementById("idBotonBajaCategoria").disabled = false;
 } 
 
 function agregarExperiencia() {
@@ -43,7 +45,6 @@ function agregarCompra() {
         miSistemas.nuevaCompra(compra);
         form.reset();
     }
-
 }
 
 function mostrarCategoria() {
@@ -66,4 +67,15 @@ function addNodo(tipo, texto) {
     let nodoT = document.createTextNode(texto);
     nodo.appendChild(nodoT);
     return nodo;
+}
+
+function eliminarCategoria() {
+    let cate = document.getElementById("idComboCategoriasAbajo");
+    let datos_cate = miSistemas.darCategoria();
+    for(let i of datos_cate){
+        if (cate == i.nombre) {
+            miSistemas.eliminarCategoria(i);
+            mostrarCategoria();
+        }
+    }
 }
