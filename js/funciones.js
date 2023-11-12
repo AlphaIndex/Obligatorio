@@ -7,6 +7,7 @@ function inicio () {
     document.getElementById("idBotonAltaExperiencia").addEventListener("click", agregarExperiencia);
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
     document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria);
+    document.getElementById("idCategoriaExperiencia").addEventListener("change", habilitarBoton);
 }
 
 function agregarCategorias() {
@@ -46,7 +47,12 @@ function agregarCompra() {
         form.reset();
     }
 }
-
+function habilitarBoton () {
+    let form = document.getElementById("idFormExperiencia");
+    if (form.reportValidity()){
+      document.getElementById("idBotonAltaExperiencia").disabled =false;   
+    }
+}
 function mostrarCategoria() {
     let cateAlta = document.getElementById("idComboCategoriasIzquierda");
     let cateBaja = document.getElementById("idComboCategoriasAbajo");
