@@ -7,7 +7,7 @@ function inicio () {
     document.getElementById("idBotonAltaExperiencia").addEventListener("click", agregarExperiencia);
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
     document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria);
-    document.getElementById("idCategoriaExperiencia").addEventListener("change", habilitarBoton);
+    document.getElementById("idBotonBajaExperiencia").addEventListener("click", eliminarExperiencias)
 }
 
 function agregarCategorias() {
@@ -15,24 +15,35 @@ function agregarCategorias() {
     if (form.reportValidity()) {
         let cat_nombre = document.getElementById("idNombreCategoria").value;
         let cat_detalles = document.getElementById("idDetallesCategoria").value;
-        let categoria = new Categoria(cat_nombre, cat_detalles);
-        miSistemas.nuevaCategoria(categoria);
-        mostrarCategoria();
+        if (validarUnicidad("nombre", cat_nombre)) {
+            let categoria = new Categoria(cat_nombre, cat_detalles);
+            miSistemas.nuevaCategoria(categoria);
+            mostrarCategoria();
+            document.getElementById("idBotonBajaCategoria").disabled = false;
+            document.getElementById("idBotonAltaExperiencia").disabled = false;  
+        }else {
+            alert("El Nombre de esta categoria ya existe ingrese uno diferente");
+        }
         form.reset();
     }
-    document.getElementById("idBotonBajaCategoria").disabled = false;
 } 
 
 function agregarExperiencia() {
     let form = document.getElementById("idFormExperiencia");
     if (form.reportValidity()){
-        let exp_titulo = document.getElementById("idTituloExperiencia");
-        let exp_descripcion = document.getElementById("idDescripcionExperiencia");
-        let exp_precio = document.getElementById("idPrecioExperiencia");
-        let exp_cantidad = document.getElementById("idCantidadPersonasExperiencia");
-        let exp_categoria = document.getElementById("idCategoriaExperiencia");
-        let exp = new Experiencias (exp_titulo, exp_descripcion, exp_precio, exp_cantidad, exp_categoria);
-        miSistemas.nuevaExperiencia(exp);
+        let exp_titulo = document.getElementById("idTituloExperiencia").value;
+        let exp_descripcion = document.getElementById("idDescripcionExperiencia").value;
+        let exp_precio = document.getElementById("idPrecioExperiencia").value;
+        let exp_cantidad = document.getElementById("idCantidadPersonasExperiencia").value;
+        let exp_categoria = document.getElementById("idCategoriaExperiencia").value;
+        if (validarUnicidad("titulo", exp_titulo)) {
+            let exp = new Experiencias (exp_titulo, exp_descripcion, exp_precio, exp_cantidad, exp_categoria);
+            miSistemas.nuevaExperiencia(exp);
+            mostrarExperiencia();
+            document.getElementById("idBotonBajaExperiencia").disabled = false;
+        } else {
+            alert("El Titulo de esta experiencia ya existe ingrese uno diferente");
+        }
         form.reset();
     }
 }
@@ -40,19 +51,14 @@ function agregarExperiencia() {
 function agregarCompra() {
     let form = document.getElementById("idFormCompra");
     if (form.reportValidity()){
-        let com_nombre = document.getElementById("idNombreComprador");
-        let com_mail = document.getElementById("idMail");
+        let com_nombre = document.getElementById("idNombreComprador").value;
+        let com_mail = document.getElementById("idMail").value;
         let compra = new Compra (com_nombre, com_mail);
         miSistemas.nuevaCompra(compra);
         form.reset();
     }
 }
-function habilitarBoton () {
-    let form = document.getElementById("idFormExperiencia");
-    if (form.reportValidity()){
-      document.getElementById("idBotonAltaExperiencia").disabled =false;   
-    }
-}
+
 function mostrarCategoria() {
     let cateAlta = document.getElementById("idComboCategoriasIzquierda");
     let cateBaja = document.getElementById("idComboCategoriasAbajo");
@@ -68,6 +74,15 @@ function mostrarCategoria() {
     }
 }
 
+function mostrarExperiencia() {
+    let cateAlta = document.getElementById("idComboBajaExperiencia");
+    cateAlta.innerHTML = "";
+    let datos = miSistemas.darExperiencia();
+    for(let i of datos) {
+        cateAlta.appendChild(addNodo("option", i.titulo));
+    }
+}
+
 function addNodo(tipo, texto) {
     let nodo = document.createElement(tipo);
     let nodoT = document.createTextNode(texto);
@@ -79,5 +94,36 @@ function addNodo(tipo, texto) {
 function eliminarCategoria() {
     let cate = document.getElementById("idComboCategoriasAbajo").selectedIndex;
     miSistemas.eliminarCategoria(cate);
-    mostrarCategoria(); 
+    mostrarCategoria();
+}
+function eliminarExperiencias() {
+    let exp = document.getElementById("idComboBajaExperiencia").selectedIndex;
+    miSistemas.eliminarExperiencias(exp);
+    mostrarExperiencia();
+}
+function mostrarTabla() {
+
+}
+function validarUnicidad(tipo, valor) {
+    let validacion = true;
+    if (tipo == "titulo"){
+        let titulos_exp = miSistemas.darExperiencia();
+        for (let i of titulos_exp) {
+            if (valor == i.titulo && validacion == true) {
+                validacion = false;
+            } else {
+                validacion = true;
+            }
+        }
+    }else {
+        let nombreCate = miSistemas.darCategoria();
+        for (let i of nombreCate) {
+            if (valor == i.nombre &&  validacion == true) {
+                validacion = false;
+            }else {
+                validacion = true;
+            }
+        }
+    }
+    return validacion;
 }
