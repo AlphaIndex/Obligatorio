@@ -31,7 +31,12 @@ class Sistema {
     eliminarCategoria(pocicion){
         this.list_categorias.splice(pocicion, 1);
     }
-
+    eliminarExperiencias(pocicion){
+        this.list_exp.splice(pocicion, 1);
+    }
+    eliminarCompra(pocicion){
+        this.list_compra.splice(pocicion, 1);
+    }
 }
 class Categoria {
     constructor(nombre_cate, detalles_cate) {
