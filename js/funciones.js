@@ -6,7 +6,7 @@ function inicio () {
     document.getElementById("idBotonAgregarCategoria").addEventListener("click", agregarCategorias);
     document.getElementById("idBotonAltaExperiencia").addEventListener("click", agregarExperiencia);
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
-    document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria)
+    document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria);
 }
 
 function agregarCategorias() {
@@ -66,16 +66,12 @@ function addNodo(tipo, texto) {
     let nodo = document.createElement(tipo);
     let nodoT = document.createTextNode(texto);
     nodo.appendChild(nodoT);
+    nodo.value = texto;
     return nodo;
 }
 
 function eliminarCategoria() {
-    let cate = document.getElementById("idComboCategoriasAbajo");
-    let datos_cate = miSistemas.darCategoria();
-    for(let i of datos_cate){
-        if (cate == i.nombre) {
-            miSistemas.eliminarCategoria(i);
-            mostrarCategoria();
-        }
-    }
+    let cate = document.getElementById("idComboCategoriasAbajo").selectedIndex;
+    miSistemas.eliminarCategoria(cate);
+    mostrarCategoria(); 
 }
