@@ -108,20 +108,16 @@ function validarUnicidad(tipo, valor) {
     let validacion = true;
     if (tipo == "titulo"){
         let titulos_exp = miSistemas.darExperiencia();
-        for (let i of titulos_exp) {
-            if (valor == i.titulo && validacion == true) {
+        for (let i = 0; i < titulos_exp.length && validacion; i++) {
+            if (valor == titulos_exp[i].titulo) {
                 validacion = false;
-            } else {
-                validacion = true;
             }
         }
     }else {
         let nombreCate = miSistemas.darCategoria();
-        for (let i of nombreCate) {
-            if (valor == i.nombre &&  validacion == true) {
+        for (let i = 0; i < nombreCate.length && validacion; i++) {
+            if (valor == nombreCate[i].nombre) {
                 validacion = false;
-            }else {
-                validacion = true;
             }
         }
     }
