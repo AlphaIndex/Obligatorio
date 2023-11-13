@@ -101,6 +101,7 @@ function eliminarExperiencias() {
     let exp = document.getElementById("idComboBajaExperiencia").selectedIndex;
     miSistemas.eliminarExperiencias(exp);
     mostrarExperiencia();
+    crearTabla();
 }
 function crearTabla() {
     let tabla = document.getElementById("idTabla");
