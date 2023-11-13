@@ -109,8 +109,8 @@ function crearTabla() {
     let datos = miSistemas.darExperiencia();
     let fila;
     for (let i of datos) {
-        let desc = addNodo("span", i.descripcion)
-        desc.setAttribute("class", "detallesTabla")
+        let desc = addNodo("span", i.descripcion);
+        desc.setAttribute("class", "detallesTabla");
         if (((datos.indexOf(i)+1)%2) != 0) {
             fila = tabla.insertRow();
             let celda = fila.insertCell();
@@ -118,12 +118,12 @@ function crearTabla() {
                 celda.setAttribute("colspan", "2");
             }
             celda.innerHTML = i.titulo + "<br>";
-            celda.appendChild(desc)
+            celda.appendChild(desc);
             celda.innerHTML += "<br>"+ i.precio;
         }else {
             let celda2 = fila.insertCell();
             celda2.innerHTML = i.titulo + "<br>";
-            celda2.appendChild(desc)
+            celda2.appendChild(desc);
             celda2.innerHTML += "<br>"+ i.precio;
         }
     }
