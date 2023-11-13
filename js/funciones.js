@@ -41,6 +41,7 @@ function agregarExperiencia() {
             miSistemas.nuevaExperiencia(exp);
             mostrarExperiencia();
             document.getElementById("idBotonBajaExperiencia").disabled = false;
+            crearTabla();
         } else {
             alert("El Titulo de esta experiencia ya existe ingrese uno diferente");
         }
@@ -101,8 +102,15 @@ function eliminarExperiencias() {
     miSistemas.eliminarExperiencias(exp);
     mostrarExperiencia();
 }
-function mostrarTabla() {
-
+function crearTabla() {
+    let tabla = document.getElementById("idTabla");
+    tabla.innerHTML = "";
+    let datos = miSistemas.darExperiencia();
+    for (let i of datos) {
+        let fila = tabla.insertRow();
+        let celda = fila.insertCell();
+        celda.innerHTML = i.titulo +"<br>"+ i.descripcion +"<br>"+ i.precio;
+    }
 }
 function validarUnicidad(tipo, valor) {
     let validacion = true;
