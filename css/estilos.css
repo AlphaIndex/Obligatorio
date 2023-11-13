@@ -2,6 +2,9 @@
 header{
 	text-align: center;
 }
+.detallesTabla {
+	font-style: italic;
+}
 .selected {
 	background-color: #f2b705;
 }

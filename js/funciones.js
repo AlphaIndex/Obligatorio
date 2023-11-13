@@ -107,10 +107,25 @@ function crearTabla() {
     let tabla = document.getElementById("idTabla");
     tabla.innerHTML = "";
     let datos = miSistemas.darExperiencia();
+    let fila;
     for (let i of datos) {
-        let fila = tabla.insertRow();
-        let celda = fila.insertCell();
-        celda.innerHTML = i.titulo +"<br>"+ i.descripcion +"<br>"+ i.precio;
+        let desc = addNodo("span", i.descripcion)
+        desc.setAttribute("class", "detallesTabla")
+        if (((datos.indexOf(i)+1)%2) != 0) {
+            fila = tabla.insertRow();
+            let celda = fila.insertCell();
+            if (datos.length-1 == datos.indexOf(i)){
+                celda.setAttribute("colspan", "2");
+            }
+            celda.innerHTML = i.titulo + "<br>";
+            celda.appendChild(desc)
+            celda.innerHTML += "<br>"+ i.precio;
+        }else {
+            let celda2 = fila.insertCell();
+            celda2.innerHTML = i.titulo + "<br>";
+            celda2.appendChild(desc)
+            celda2.innerHTML += "<br>"+ i.precio;
+        }
     }
 }
 function validarUnicidad(tipo, valor) {
