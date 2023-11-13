@@ -111,6 +111,8 @@ function crearTabla() {
     for (let i of datos) {
         let desc = addNodo("span", i.descripcion);
         desc.setAttribute("class", "detallesTabla");
+        let img_1 = document.createElement("img");
+        img_1.setAttribute("src", "img/uno.png");
         if (((datos.indexOf(i)+1)%2) != 0) {
             fila = tabla.insertRow();
             let celda = fila.insertCell();
@@ -124,7 +126,8 @@ function crearTabla() {
             let celda2 = fila.insertCell();
             celda2.innerHTML = i.titulo + "<br>";
             celda2.appendChild(desc);
-            celda2.innerHTML += "<br>"+ i.precio;
+            celda2.innerHTML += "<br>"+ i.precio + "<br>";
+            celda2.appendChild(img_1);
         }
     }
 }
