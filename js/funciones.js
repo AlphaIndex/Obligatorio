@@ -120,6 +120,6 @@ function validarUnicidad(tipo, valor) {
                 validacion = false;
             }
         }
-    }
+    } 
     return validacion;
 }
