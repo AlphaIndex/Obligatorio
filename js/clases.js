@@ -28,15 +28,19 @@ class Sistema {
     darCategoria() {
         return this.list_categorias;
     }
+
     eliminarCategoria(pocicion){
         this.list_categorias.splice(pocicion, 1);
     }
+
     eliminarExperiencias(pocicion){
         this.list_exp.splice(pocicion, 1);
     }
+    
     eliminarCompra(pocicion){
         this.list_compra.splice(pocicion, 1);
     }
+
     ordenarExpCreciente(){
         let listaOrdenada = [];
         for (let i of this.list_exp) {
@@ -47,6 +51,7 @@ class Sistema {
         });
         return listaOrdenada;
     }
+
     ordenarExpDecreciente(){
         let listaOrdenada = [];
         for (let i of this.list_exp) {
@@ -57,8 +62,27 @@ class Sistema {
         });
         return listaOrdenada;
     }
+
     encontrarCategoria(posicion){
         return this.list_categorias[posicion];
+    }
+    verificarExistencia(posicion){
+        let validity = true;
+        for (let i of this.list_exp){
+            if (this.list_categorias[posicion].nombre == i.categoria.nombre) {
+                validity = false;
+            }
+        }
+        return validity;
+    }
+    filtrarCategoria(categoria, lista) {
+        let listaFiltrada = [];
+        for (let i of lista){
+            if (this.list_categorias[categoria].nombre == i.categoria.nombre){
+                listaFiltrada.push(i);
+            }
+        }
+        return listaFiltrada;
     }
 }
 class Categoria {

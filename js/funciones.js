@@ -96,8 +96,13 @@ function addNodo(tipo, texto) {
 
 function eliminarCategoria() {
     let cate = document.getElementById("idComboCategoriasAbajo").selectedIndex;
-    miSistemas.eliminarCategoria(cate);
+    if (miSistemas.verificarExistencia(cate)) {
+        miSistemas.eliminarCategoria(cate);
+    }else {
+        alert("Esa categoria no puede eliminarse porque esta en uso");
+    }
     mostrarCategoria();
+
 }
 function eliminarExperiencias() {
     let exp = document.getElementById("idComboBajaExperiencia").selectedIndex;
@@ -109,9 +114,7 @@ function crearTabla() {
     let tabla = document.getElementById("idTabla");
     tabla.innerHTML = "";
     let datos = reordenarExp();
-   // if (document.getElementById("idComboCategoriasIzquierda").selectedIndex != 0) {
-    datos = filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
-   // }
+    datos = miSistemas.filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
     let fila;
     for (let i of datos) {
         let desc = addNodo("span", i.descripcion);
@@ -177,13 +180,4 @@ function reordenarExp(){
         orden = miSistemas.ordenarExpDecreciente();
     }
     return orden;
-}
-function filtrarCategoria(categoria, lista) {
-    let listaFiltrada = [];
-    for (let i of lista){
-        if (this.list_categorias[categoria].nombre == i.categoria.nombre){
-            listaFiltrada.push(i);
-        }
-    }
-    return listaFiltrada;
 }
