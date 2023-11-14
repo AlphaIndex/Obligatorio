@@ -8,7 +8,8 @@ function inicio () {
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
     document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria);
     document.getElementById("idBotonBajaExperiencia").addEventListener("click", eliminarExperiencias);
-    document.getElementById("idOrdenPrecio").addEventListener("change", reordenarExp);
+    document.getElementById("idOrdenPrecio").addEventListener("change", crearTabla);
+    document.getElementById("idComboCategoriasIzquierda").addEventListener("change", crearTabla);
 }
 
 function agregarCategorias() {
@@ -36,13 +37,12 @@ function agregarExperiencia() {
         let exp_descripcion = document.getElementById("idDescripcionExperiencia").value;
         let exp_precio = document.getElementById("idPrecioExperiencia").value;
         let exp_cantidad = document.getElementById("idCantidadPersonasExperiencia").selectedIndex;
-        let exp_categoria = document.getElementById("idCategoriaExperiencia").value;
+        let exp_categoria = miSistemas.encontrarCategoria(document.getElementById("idCategoriaExperiencia").selectedIndex);
         if (validarUnicidad("titulo", exp_titulo)) {
             let exp = new Experiencias (exp_titulo, exp_descripcion, exp_precio, exp_cantidad, exp_categoria);
             miSistemas.nuevaExperiencia(exp);
             mostrarExperiencia();
             document.getElementById("idBotonBajaExperiencia").disabled = false;
-            reordenarExp()
             crearTabla();
         } else {
             alert("El Titulo de esta experiencia ya existe ingrese uno diferente");
@@ -108,7 +108,10 @@ function eliminarExperiencias() {
 function crearTabla() {
     let tabla = document.getElementById("idTabla");
     tabla.innerHTML = "";
-    let datos = miSistemas.darExperiencia();
+    let datos = reordenarExp();
+   // if (document.getElementById("idComboCategoriasIzquierda").selectedIndex != 0) {
+    datos = miSistemas.filtrarCategoria( document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
+   // }
     let fila;
     for (let i of datos) {
         let desc = addNodo("span", i.descripcion);
@@ -167,10 +170,11 @@ function selectImg(cantidad){
     return img;
 }
 function reordenarExp(){
+    let orden;
     if (document.getElementById("idOrdenPrecio").selectedIndex == 0){
-        miSistemas.ordenarExpCreciente();
+        orden = miSistemas.ordenarExpCreciente();
     }else{
-        miSistemas.ordenarExpDecreciente();
-    } 
-    crearTabla();
+        orden = miSistemas.ordenarExpDecreciente();
+    }
+    return orden;
 }

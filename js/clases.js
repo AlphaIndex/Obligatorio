@@ -38,16 +38,36 @@ class Sistema {
         this.list_compra.splice(pocicion, 1);
     }
     ordenarExpCreciente(){
-        let listaOrdenada = this.list_exp;
+        let listaOrdenada = [];
+        for (let i of this.list_exp) {
+            listaOrdenada.push(i);
+        }
         listaOrdenada.sort(function(a,b){
             return a.compararCon(b);
         });
+        return listaOrdenada;
     }
     ordenarExpDecreciente(){
-        let listaOrdenada = this.list_exp;
+        let listaOrdenada = [];
+        for (let i of this.list_exp) {
+            listaOrdenada.push(i);
+        }
         listaOrdenada.sort(function(a,b){
             return b.compararCon(a);
         });
+        return listaOrdenada;
+    }
+    filtrarCategoria(categoria, lista) {
+        let listaFiltrada = [];
+        for (let i of lista){
+            if (this.list_categorias[categoria].nombre == i.categoria.nombre){
+                listaFiltrada.push(i);
+            }
+        }
+        return listaFiltrada;
+    }
+    encontrarCategoria(posicion){
+        return this.list_categorias[posicion];
     }
 }
 class Categoria {
