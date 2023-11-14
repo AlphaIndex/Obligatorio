@@ -110,7 +110,7 @@ function crearTabla() {
     tabla.innerHTML = "";
     let datos = reordenarExp();
    // if (document.getElementById("idComboCategoriasIzquierda").selectedIndex != 0) {
-    datos = miSistemas.filtrarCategoria( document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
+    datos = filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
    // }
     let fila;
     for (let i of datos) {
@@ -177,4 +177,13 @@ function reordenarExp(){
         orden = miSistemas.ordenarExpDecreciente();
     }
     return orden;
+}
+function filtrarCategoria(categoria, lista) {
+    let listaFiltrada = [];
+    for (let i of lista){
+        if (this.list_categorias[categoria].nombre == i.categoria.nombre){
+            listaFiltrada.push(i);
+        }
+    }
+    return listaFiltrada;
 }

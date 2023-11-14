@@ -57,15 +57,6 @@ class Sistema {
         });
         return listaOrdenada;
     }
-    filtrarCategoria(categoria, lista) {
-        let listaFiltrada = [];
-        for (let i of lista){
-            if (this.list_categorias[categoria].nombre == i.categoria.nombre){
-                listaFiltrada.push(i);
-            }
-        }
-        return listaFiltrada;
-    }
     encontrarCategoria(posicion){
         return this.list_categorias[posicion];
     }
