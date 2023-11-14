@@ -37,6 +37,18 @@ class Sistema {
     eliminarCompra(pocicion){
         this.list_compra.splice(pocicion, 1);
     }
+    ordenarExpCreciente(){
+        let listaOrdenada = this.list_exp;
+        listaOrdenada.sort(function(a,b){
+            return a.compararCon(b);
+        });
+    }
+    ordenarExpDecreciente(){
+        let listaOrdenada = this.list_exp;
+        listaOrdenada.sort(function(a,b){
+            return b.compararCon(a);
+        });
+    }
 }
 class Categoria {
     constructor(nombre_cate, detalles_cate) {
@@ -55,6 +67,9 @@ class Experiencias {
         this.precio = precio_exp;
         this.cantidad = cantidad_exp;
         this.categoria = categoria_exp;
+    }
+    compararCon(otro) {
+        return this.precio-otro.precio;
     }
     toString () {
         return "Titulo: " + this.titulo + "Descripcion: " + this.descripcion + "Precio: " + this.precio + "Cantidad: " + this.cantidad + "Categoria: " + this.categoria;
