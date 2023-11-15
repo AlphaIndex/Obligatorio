@@ -10,6 +10,7 @@ function inicio () {
     document.getElementById("idBotonBajaExperiencia").addEventListener("click", eliminarExperiencias);
     document.getElementById("idOrdenPrecio").addEventListener("change", crearTabla);
     document.getElementById("idComboCategoriasIzquierda").addEventListener("change", crearTabla);
+    document.getElementById("idCantidadPersonasCategoria").addEventListener("change", crearTabla);
 }
 
 function agregarCategorias() {
@@ -115,6 +116,9 @@ function crearTabla() {
     tabla.innerHTML = "";
     let datos = reordenarExp();
     datos = miSistemas.filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
+    if (document.getElementById("idCantidadPersonasCategoria").selectedIndex != 0) {
+        miSistemas.filtrarCantidadP(datos,document.getElementById("idCantidadPersonasCategoria").selectedIndex -1);
+    }
     let fila;
     for (let i of datos) {
         let desc = addNodo("span", i.descripcion);
@@ -138,7 +142,9 @@ function crearTabla() {
             celda2.appendChild(img);
         }
     }
+
 }
+
 function validarUnicidad(tipo, valor) {
     let validacion = true;
     if (tipo == "titulo"){

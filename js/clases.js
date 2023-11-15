@@ -8,7 +8,6 @@ class Sistema {
     nuevaCategoria(categroria) {
         this.list_categorias.push(categroria);
     }
-
     nuevaExperiencia(experiencia) {
         this.list_exp.push(experiencia);
     }
@@ -79,6 +78,15 @@ class Sistema {
         let listaFiltrada = [];
         for (let i of lista){
             if (this.list_categorias[categoria].nombre == i.categoria.nombre){
+                listaFiltrada.push(i);
+            }
+        }
+        return listaFiltrada;
+    }
+    filtrarCantidadP (posicion, lista){
+        let listaFiltrada = [];
+        for (let i of lista) {
+            if (this.list_exp[posicion].cantidad == i.cantidad) {
                 listaFiltrada.push(i);
             }
         }
