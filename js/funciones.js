@@ -11,6 +11,7 @@ function inicio () {
     document.getElementById("idOrdenPrecio").addEventListener("change", crearTabla);
     document.getElementById("idComboCategoriasIzquierda").addEventListener("change", crearTabla);
     document.getElementById("idCantidadPersonasCategoria").addEventListener("change", crearTabla);
+
 }
 
 function agregarCategorias() {
@@ -117,7 +118,7 @@ function crearTabla() {
     let datos = reordenarExp();
     datos = miSistemas.filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
     if (document.getElementById("idCantidadPersonasCategoria").selectedIndex != 0) {
-        miSistemas.filtrarCantidadP(datos,document.getElementById("idCantidadPersonasCategoria").selectedIndex -1);
+        datos = miSistemas.filtrarCantidadP(document.getElementById("idCantidadPersonasCategoria").selectedIndex - 1,datos);
     }
     let fila;
     for (let i of datos) {
@@ -134,12 +135,32 @@ function crearTabla() {
             celda.appendChild(desc);
             celda.innerHTML += "<br>"+ i.precio;
             celda.appendChild(img);
+            celda.addEventListener("click", 
+            function () {
+                if (document.getElementsByClassName("celdaTabla")[0] != undefined) {
+                    document.getElementsByClassName("celdaTabla")[0].setAttribute("class","");
+                    celda.setAttribute("class", "celdaTabla");
+                }else {
+                    celda.setAttribute("class", "celdaTabla");
+                }                
+            }
+            )
         }else {
             let celda2 = fila.insertCell();
             celda2.innerHTML = i.titulo + "<br>";
             celda2.appendChild(desc);
             celda2.innerHTML += "<br>"+ i.precio + "<br>";
             celda2.appendChild(img);
+            celda2.addEventListener("click", 
+            function () {
+                if (document.getElementsByClassName("celdaTabla") != undefined) {
+                    document.getElementsByClassName("celdaTabla")[0].setAttribute("class","")
+                    celda2.setAttribute("class", "celdaTabla");
+                }else {
+                    celda2.setAttribute("class", "celdaTabla");
+                }                
+            }
+            )
         }
     }
 

@@ -86,7 +86,7 @@ class Sistema {
     filtrarCantidadP (posicion, lista){
         let listaFiltrada = [];
         for (let i of lista) {
-            if (this.list_exp[posicion].cantidad == i.cantidad) {
+            if (posicion == i.cantidad) {
                 listaFiltrada.push(i);
             }
         }
