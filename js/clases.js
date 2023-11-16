@@ -4,6 +4,7 @@ class Sistema {
         this.list_categorias = [];
         this.list_exp = [];
         this.list_compra = [];
+        this.titulo_exp = "";
     }
     nuevaCategoria(categroria) {
         this.list_categorias.push(categroria);
@@ -92,6 +93,12 @@ class Sistema {
         }
         return listaFiltrada;
     }
+    asignarValorTitulo (titulo){
+        this.titulo_exp = titulo;
+    }
+    darNombreExperiencia(){
+        return this.titulo_exp;
+    }
 }
 class Categoria {
     constructor(nombre_cate, detalles_cate) {
@@ -119,11 +126,12 @@ class Experiencias {
     }
 }
 class Compra {
-    constructor(nombre_compr, mail_compra) {
-        this.nombre = nombre_compr;
+    constructor(nombre_compra, mail_compra, experiencia_compra) {
+        this.nombre = nombre_compra;
         this.mail = mail_compra;
+        this.experiencia = experiencia_compra;
     }
     toString () {
-        return "Nombre: " + this.nombre + "Mail: " + this.mail;
+        return "Nombre: " + this.nombre + " Mail: " + this.mail + " Comprar: " + this.experiencia;
     }
 }
