@@ -66,10 +66,19 @@ class Sistema {
     encontrarCategoria(posicion){
         return this.list_categorias[posicion];
     }
-    verificarExistencia(posicion){
+    verificarExistenciaExp(posicion){
         let validity = true;
         for (let i of this.list_exp){
             if (this.list_categorias[posicion].nombre == i.categoria.nombre) {
+                validity = false;
+            }
+        }
+        return validity;
+    }
+    verificarExistenciaComp(posicion){
+        let validity = true;
+        for (let i of this.list_compra){
+            if (this.list_exp[posicion].titulo == i.experiencia.titulo) {
                 validity = false;
             }
         }
@@ -84,7 +93,7 @@ class Sistema {
         }
         return listaFiltrada;
     }
-    filtrarCantidadP (posicion, lista){
+    filtrarCantidadP(posicion, lista) {
         let listaFiltrada = [];
         for (let i of lista) {
             if (posicion == i.cantidad) {
@@ -93,11 +102,31 @@ class Sistema {
         }
         return listaFiltrada;
     }
-    asignarValorTitulo (titulo){
+    asignarValorTitulo(titulo) {
         this.titulo_exp = titulo;
     }
     darNombreExperiencia(){
         return this.titulo_exp;
+    }
+    agregarcompra(exp) {
+        for (let i of this.list_exp) {
+            if (i.titulo == exp.experiencia.titulo) {
+                i.compras++;
+            }
+        } 
+    }
+    mayorcompra() {
+        let masComprada = [];
+        let mayorValor = 0;
+        for (let i of this.list_exp) {
+            if (i.compras > mayorValor){
+                masComprada.slice(0, masComprada.length);
+                masComprada.push(i);
+            }else if (i.compras = mayorValor) {
+                masComprada.push(i);
+            }
+        }
+        return masComprada;
     }
 }
 class Categoria {
@@ -117,6 +146,7 @@ class Experiencias {
         this.precio = precio_exp;
         this.cantidad = cantidad_exp;
         this.categoria = categoria_exp;
+        this.compras = 0;
     }
     compararCon(otro) {
         return this.precio-otro.precio;
