@@ -60,8 +60,10 @@ function agregarCompra() {
         let com_nombre = document.getElementById("idNombreComprador").value;
         let com_mail = document.getElementById("idMail").value; 
         let com_experiencia = miSistemas.darNombreExperiencia();
-        let compra = new Compra (com_nombre, com_mail, com_experiencia);
+        let com_fecha = crearFecha();
+        let compra = new Compra (com_nombre, com_mail, com_experiencia, com_fecha);
         miSistemas.nuevaCompra(compra);
+        crearLista()
         form.reset(); 
     }
 }
@@ -188,7 +190,15 @@ function crearTabla() {
     }
 
 }
-
+function crearLista(){
+    let cuerpo_lista = document.getElementById("idListaCompras")
+    cuerpo_lista.innerHTML = "";
+    let datos = miSistemas.darCompra();
+    for (let i of datos){
+        let texto = "Nombre Comprador: " + i.nombre + " Mail: " + i.mail + " Experiencia: " + i.experiencia.titulo + " Fecha: " + i.fecha
+        cuerpo_lista.appendChild(addNodo("li", texto))
+    }
+}
 function validarUnicidad(tipo, valor) {
     let validacion = true;
     if (tipo == "titulo"){
@@ -253,5 +263,37 @@ function habilitarBotonCompra(){
         document.getElementById("idBotonComprar").disabled = true;
     }else {
         document.getElementById("idBotonComprar").disabled = false;
+    }
+}
+
+function crearFecha() {
+    let dias=["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
+    let hoy = new Date();
+    let hora = hoy.getHours();
+    let min = hoy.getMinutes();
+	let dia_sem = dias[hoy.getDay()];
+    let dia_mes = hoy.getDate();
+    let mes = hoy.getMonth();
+    if(min<10){
+	min = "0" + min;
+    }
+    if(hora<10){
+        hora = "0" + hora;
+    }
+	
+    let ret = dia_sem+ " " + hoy.toLocaleDateString()+ " " + hora + ":" + min;
+
+    return ret;
+}
+function exp_masCara() {
+    let experiencias = miSistemas.darExperiencia();
+    let mayorPrecio = -1;
+    let experiencia_cara;
+    for (let i of experiencias) {
+        if (mayorPrecio < i.precio){
+            mayorPrecio = i.precio;
+        }else if (mayorPrecio == i.precio) {
+
+        }
     }
 }

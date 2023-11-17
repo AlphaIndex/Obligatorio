@@ -126,12 +126,13 @@ class Experiencias {
     }
 }
 class Compra {
-    constructor(nombre_compra, mail_compra, experiencia_compra) {
+    constructor(nombre_compra, mail_compra, experiencia_compra,fecha_compra) {
         this.nombre = nombre_compra;
         this.mail = mail_compra;
         this.experiencia = experiencia_compra;
+        this.fecha = fecha_compra;
     }
     toString () {
-        return "Nombre: " + this.nombre + " Mail: " + this.mail + " Comprar: " + this.experiencia;
+        return "Nombre: " + this.nombre + " Mail: " + this.mail + " Experiencia: " + this.experiencia + " Fecha: " + this.fecha_compra;
     }
 }
