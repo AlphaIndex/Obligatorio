@@ -218,7 +218,7 @@ function crearListaCompras(){
         let filtrado = miSistemas.filtrarCategoriaCompra(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
         if (filtrado.length != 0) {
             for(let j of filtrado){
-                let texto =  "Nombre Comprador: " + j.nombre + " Mail: " + j.mail + " Experiencia: " + j.experiencia.titulo + " Fecha: " + j.fecha;
+                let texto =  "Nombre: " + j.nombre + " Mail: " + j.mail + " Fecha: " + j.fecha;
                 cuerpo_lista.appendChild(addNodo("li", texto));
             }
         }else {
@@ -309,7 +309,7 @@ function crearFecha() {
     if(hora<10){
         hora = "0" + hora;
     }
-    let ret = "Fecha: " + hoy.toLocaleDateString() + " Hora " + hora + ":" + min;
+    let ret = hoy.toLocaleDateString() + " Hora " + hora + ":" + min;
     return ret;
 }
 
