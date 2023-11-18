@@ -29,16 +29,16 @@ class Sistema {
         return this.list_categorias;
     }
 
-    eliminarCategoria(pocicion){
-        this.list_categorias.splice(pocicion, 1);
+    eliminarCategoria(posicion){
+        this.list_categorias.splice(posicion, 1);
     }
 
-    eliminarExperiencias(pocicion){
-        this.list_exp.splice(pocicion, 1);
+    eliminarExperiencias(posicion){
+        this.list_exp.splice(posicion, 1);
     }
     
-    eliminarCompra(pocicion){
-        this.list_compra.splice(pocicion, 1);
+    eliminarCompra(posicion){
+        this.list_compra.splice(posicion, 1);
     }
 
     ordenarExpCreciente(){

@@ -24,7 +24,7 @@ function agregarCategorias() {
             miSistemas.nuevaCategoria(categoria);
             mostrarCategoria();
         }else {
-            alert("El Nombre de esta categoria ya existe ingrese uno diferente");
+            alert("El Nombre de esta categoría ya existe ingrese uno diferente");
         }
         habilitarBotonCategoria();
         form.reset();
@@ -108,11 +108,12 @@ function eliminarCategoria() {
     if (miSistemas.verificarExistenciaExp(cate)) {
         miSistemas.eliminarCategoria(cate);
     }else {
-        alert("Esa categoria no puede eliminarse porque esta en uso");
+        alert("Esa categoría no puede eliminarse porque esta en uso");
     }
     mostrarCategoria();
     habilitarBotonCategoria();
 }
+
 function eliminarExperiencias() {
     let exp = document.getElementById("idComboBajaExperiencia").selectedIndex;
     if (miSistemas.verificarExistenciaComp(exp)) {
@@ -123,15 +124,17 @@ function eliminarExperiencias() {
         crearTabla();
         habilitarBotonExperiencias();
     }else {
-        alert("Esa experiencia no puede eliminarse porque esta en uso");
+        alert("Esa experiencia no puede eliminarse porque está en uso");
     }
 }
+
 function Reiniciar_compra(){
     document.getElementById("idCualExperiencia").innerHTML = "Experiencia: ";
     habilitarBotonCompra();
     crearTabla();
     crearListaCompras()
 }
+
 function crearTabla() {
     let tabla = document.getElementById("idTabla");
     tabla.innerHTML = "";
@@ -204,6 +207,7 @@ function crearTabla() {
         }
     }
 }
+
 function crearListaCompras(){
     if (miSistemas.darCompra().length != 0){
         let cuerpo_lista = document.getElementById("idListaCompras");
@@ -222,6 +226,7 @@ function crearListaCompras(){
         }
     }
 }
+
 function validarUnicidad(tipo, valor) {
     let validacion = true;
     if (tipo == "titulo"){
@@ -241,6 +246,7 @@ function validarUnicidad(tipo, valor) {
     } 
     return validacion;
 }
+
 function selectImg(cantidad){
     let img;
     if (cantidad == 0) {
@@ -255,6 +261,7 @@ function selectImg(cantidad){
     }
     return img;
 }
+
 function reordenarExp(){
     let orden;
     if (document.getElementById("idOrdenPrecio").selectedIndex == 0){
@@ -264,6 +271,7 @@ function reordenarExp(){
     }
     return orden;
 }
+
 function habilitarBotonCategoria(){
 if (miSistemas.list_categorias.length == 0) {
     document.getElementById("idBotonBajaCategoria").disabled = true;
@@ -274,6 +282,7 @@ if (miSistemas.list_categorias.length == 0) {
     document.getElementById("idBotonAltaExperiencia").disabled = false;
 }
 }
+
 function habilitarBotonExperiencias(){
     if (miSistemas.list_exp.length == 0) {
         document.getElementById("idBotonBajaExperiencia").disabled = true;
@@ -281,6 +290,7 @@ function habilitarBotonExperiencias(){
         document.getElementById("idBotonBajaExperiencia").disabled = false;
     }
 }
+
 function habilitarBotonCompra(){
     if (document.getElementById("idCualExperiencia").innerHTML == "Experiencia: ") {
         document.getElementById("idBotonComprar").disabled = true;
@@ -290,24 +300,19 @@ function habilitarBotonCompra(){
 }
 
 function crearFecha() {
-    let dias=["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
     let hoy = new Date();
     let hora = hoy.getHours();
     let min = hoy.getMinutes();
-	let dia_sem = dias[hoy.getDay()];
-    let dia_mes = hoy.getDate();
-    let mes = hoy.getMonth();
     if(min<10){
-	min = "0" + min;
+	    min = "0" + min;
     }
     if(hora<10){
         hora = "0" + hora;
     }
-	
-    let ret = dia_sem+ " " + hoy.toLocaleDateString()+ " " + hora + ":" + min;
-
+    let ret = "Fecha: " + hoy.toLocaleDateString() + " Hora " + hora + ":" + min;
     return ret;
 }
+
 function exp_masCara() {
     let experiencias = miSistemas.darExperiencia();
     let mayorPrecio = -1;
@@ -330,6 +335,7 @@ function exp_masCara() {
         parrafo.innerHTML = "Sin datos";
     }
 }
+
 function crearListaExpMasCompradas(){
     let cuerpo_lista = document.getElementById("idExperienciasMasCompradas")
     cuerpo_lista.innerHTML = "";
