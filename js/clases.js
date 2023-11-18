@@ -93,6 +93,15 @@ class Sistema {
         }
         return listaFiltrada;
     }
+    filtrarCategoriaCompra(categoria, lista) {
+        let listaFiltrada = [];
+        for (let i of lista){
+            if (this.list_categorias[categoria].nombre == i.experiencia.categoria.nombre){
+                listaFiltrada.push(i);
+            }
+        }
+        return listaFiltrada;
+    }
     filtrarCantidadP(posicion, lista) {
         let listaFiltrada = [];
         for (let i of lista) {
@@ -120,9 +129,10 @@ class Sistema {
         let mayorValor = 0;
         for (let i of this.list_exp) {
             if (i.compras > mayorValor){
-                masComprada.slice(0, masComprada.length);
+                masComprada = [];
                 masComprada.push(i);
-            }else if (i.compras = mayorValor) {
+                mayorValor = i.compras;
+            }else if (i.compras == mayorValor) {
                 masComprada.push(i);
             }
         }

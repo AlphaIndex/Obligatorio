@@ -8,9 +8,9 @@ function inicio () {
     document.getElementById("idBotonComprar").addEventListener("click", agregarCompra);
     document.getElementById("idBotonBajaCategoria").addEventListener("click", eliminarCategoria);
     document.getElementById("idBotonBajaExperiencia").addEventListener("click", eliminarExperiencias);
-    document.getElementById("idOrdenPrecio").addEventListener("change", crearTabla);
-    document.getElementById("idComboCategoriasIzquierda").addEventListener("change", crearTabla);
-    document.getElementById("idCantidadPersonasCategoria").addEventListener("change", crearTabla);
+    document.getElementById("idOrdenPrecio").addEventListener("change", Reiniciar_compra);
+    document.getElementById("idComboCategoriasIzquierda").addEventListener("change", Reiniciar_compra);
+    document.getElementById("idCantidadPersonasCategoria").addEventListener("change", Reiniciar_compra);
 
 }
 
@@ -66,7 +66,7 @@ function agregarCompra() {
         miSistemas.nuevaCompra(compra);
         miSistemas.agregarcompra(compra);
         crearListaExpMasCompradas();
-        crearLista();
+        crearListaCompras();
         form.reset(); 
     }
 }
@@ -125,6 +125,12 @@ function eliminarExperiencias() {
     }else {
         alert("Esa experiencia no puede eliminarse porque esta en uso");
     }
+}
+function Reiniciar_compra(){
+    document.getElementById("idCualExperiencia").innerHTML = "Experiencia: ";
+    habilitarBotonCompra();
+    crearTabla();
+    crearListaCompras()
 }
 function crearTabla() {
     let tabla = document.getElementById("idTabla");
@@ -199,13 +205,20 @@ function crearTabla() {
     }
 
 }
-function crearLista(){
-    let cuerpo_lista = document.getElementById("idListaCompras")
-    cuerpo_lista.innerHTML = "";
-    let datos = miSistemas.darCompra();
-    for (let i of datos){
-        let texto = "Nombre Comprador: " + i.nombre + " Mail: " + i.mail + " Experiencia: " + i.experiencia.titulo + " Fecha: " + i.fecha
-        cuerpo_lista.appendChild(addNodo("li", texto))
+function crearListaCompras(){
+    if (miSistemas.darCompra().length != 0){
+        let cuerpo_lista = document.getElementById("idListaCompras")
+        cuerpo_lista.innerHTML = "";
+        let datos = miSistemas.darCompra();
+        let filtrado = miSistemas.filtrarCategoriaCompra(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
+        if (filtrado.length != 0) {
+            for(let j of filtrado){
+                let texto =  "Nombre Comprador: " + j.nombre + " Mail: " + j.mail + " Experiencia: " + j.experiencia.titulo + " Fecha: " + j.fecha;
+                cuerpo_lista.appendChild(addNodo("li", texto));
+            }
+        }else {
+            cuerpo_lista.appendChild(addNodo("li", "Sin datos"));
+        }
     }
 }
 function validarUnicidad(tipo, valor) {
@@ -300,11 +313,11 @@ function exp_masCara() {
     let experiencia_cara;
     if (miSistemas.darExperiencia().length > 0){
         for (let i of experiencias) {
-            if (mayorPrecio < i.precio){
+            if (parseInt(mayorPrecio) < parseInt(i.precio)){
                 mayorPrecio = i.precio;
-                experiencia_cara = i.titulo + " " + i.precio; 
+                experiencia_cara = i.precio; 
             }else if (mayorPrecio == i.precio) {
-                experiencia_cara += "<br>" + i.titulo + " " + i.precio;
+                experiencia_cara += "<br>" + i.precio;
             }
         }
         let parrafo = document.getElementById("idExperienciaMasCara");
