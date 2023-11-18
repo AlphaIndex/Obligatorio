@@ -27,6 +27,7 @@ function agregarCategorias() {
             alert("El Nombre de esta categoría ya existe ingrese uno diferente");
         }
         habilitarBotonCategoria();
+        crearListaCompras();
         form.reset();
     }
 } 
@@ -107,11 +108,12 @@ function eliminarCategoria() {
     let cate = document.getElementById("idComboCategoriasAbajo").selectedIndex;
     if (miSistemas.verificarExistenciaExp(cate)) {
         miSistemas.eliminarCategoria(cate);
+        mostrarCategoria();
+        habilitarBotonCategoria();
+        crearListaCompras();
     }else {
         alert("Esa categoría no puede eliminarse porque esta en uso");
     }
-    mostrarCategoria();
-    habilitarBotonCategoria();
 }
 
 function eliminarExperiencias() {
@@ -210,11 +212,16 @@ function crearTabla() {
 }
 
 function crearListaCompras(){
+    if (miSistemas.darCategoria().length != 0) {
+        let parrafo_categoria = document.getElementById("idDetallesCualCategoria");
+        parrafo_categoria.innerHTML = "Información detallada de la categoría " + miSistemas.encontrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex).nombre;
+    }else {
+        let parrafo_categoria = document.getElementById("idDetallesCualCategoria");
+        parrafo_categoria.innerHTML = "";
+    }
     if (miSistemas.darCompra().length != 0){
         let cuerpo_lista = document.getElementById("idListaCompras");
-        let parrafo_categoria = document.getElementById("idDetallesCualCategoria");
         cuerpo_lista.innerHTML = "";
-        parrafo_categoria.innerHTML = "Información detallada de la categoría " + miSistemas.encontrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex).nombre;
         let datos = miSistemas.darCompra();
         let filtrado = miSistemas.filtrarCategoriaCompra(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
         if (filtrado.length != 0) {
