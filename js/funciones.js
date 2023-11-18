@@ -153,7 +153,7 @@ function crearTabla() {
             }
             celda.innerHTML = i.titulo + "<br>";
             celda.appendChild(desc);
-            celda.innerHTML += "<br>"+ i.precio;
+            celda.innerHTML += "<br>"+ "$" + i.precio;
             celda.appendChild(img);
             celda.addEventListener("click", 
             function () {
@@ -179,7 +179,7 @@ function crearTabla() {
             let celda2 = fila.insertCell();
             celda2.innerHTML = i.titulo + "<br>";
             celda2.appendChild(desc);
-            celda2.innerHTML += "<br>"+ i.precio + "<br>";
+            celda2.innerHTML += "<br>"+ "$" + i.precio + "<br>";
             celda2.appendChild(img);
             celda2.addEventListener("click", 
             function () {
@@ -203,12 +203,13 @@ function crearTabla() {
             )
         }
     }
-
 }
 function crearListaCompras(){
     if (miSistemas.darCompra().length != 0){
-        let cuerpo_lista = document.getElementById("idListaCompras")
+        let cuerpo_lista = document.getElementById("idListaCompras");
+        let parrafo_categoria = document.getElementById("idDetallesCualCategoria");
         cuerpo_lista.innerHTML = "";
+        parrafo_categoria.innerHTML = "Información detallada de la categoría " + miSistemas.encontrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex).nombre;
         let datos = miSistemas.darCompra();
         let filtrado = miSistemas.filtrarCategoriaCompra(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
         if (filtrado.length != 0) {
