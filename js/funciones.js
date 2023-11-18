@@ -123,6 +123,7 @@ function eliminarExperiencias() {
         mostrarExperiencia();
         crearTabla();
         habilitarBotonExperiencias();
+        exp_masCara();
     }else {
         alert("Esa experiencia no puede eliminarse porque está en uso");
     }
@@ -322,8 +323,6 @@ function exp_masCara() {
             if (parseInt(mayorPrecio) < parseInt(i.precio)){
                 mayorPrecio = i.precio;
                 experiencia_cara = i.precio; 
-            }else if (mayorPrecio == i.precio) {
-                experiencia_cara += "<br>" + i.precio;
             }
         }
         let parrafo = document.getElementById("idExperienciaMasCara");
