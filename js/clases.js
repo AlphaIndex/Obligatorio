@@ -66,6 +66,9 @@ class Sistema {
     encontrarCategoria(posicion){
         return this.list_categorias[posicion];
     }
+   // encontrarExperiencia(posicion){
+   //     return this.list_exp[posicion];
+   // }
     verificarExistenciaExp(posicion){
         let validity = true;
         for (let i of this.list_exp){
@@ -93,6 +96,15 @@ class Sistema {
         }
         return listaFiltrada;
     }
+  /*  filtrarCategoriaCompraList(categoria, lista) {
+        let listaFiltrada = [];
+        for (let i of lista){
+            if (categoria == i.experiencia.categoria.nombre){
+                listaFiltrada.push(i);
+            }
+        }
+        return listaFiltrada;
+    }*/
     filtrarCategoriaCompra(categoria, lista) {
         let listaFiltrada = [];
         for (let i of lista){
@@ -138,6 +150,13 @@ class Sistema {
         }
         return masComprada;
     }
+   /* devolverTitulos() {
+        let listaTitulos = [];
+        for (let i of this.list_exp) {
+            listaTitulos.push(i.titulo);
+        }
+        return listaTitulos;
+    }*/
 }
 class Categoria {
     constructor(nombre_cate, detalles_cate) {

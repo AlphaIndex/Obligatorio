@@ -50,7 +50,6 @@ function agregarExperiencia() {
             alert("El Titulo de esta experiencia ya existe ingrese uno diferente");
         }
         habilitarBotonExperiencias();
-        document.getElementById("idCualExperiencia").innerHTML = "Experiencia: ";
         habilitarBotonCompra();
         form.reset();
     }
@@ -133,9 +132,9 @@ function eliminarExperiencias() {
 
 function Reiniciar_compra(){
     document.getElementById("idCualExperiencia").innerHTML = "Experiencia: ";
-    habilitarBotonCompra();
     crearTabla();
-    crearListaCompras()
+    crearListaCompras();
+    habilitarBotonCompra();
 }
 
 function crearTabla() {
@@ -156,23 +155,29 @@ function crearTabla() {
             let celda = fila.insertCell();
             if (datos.length-1 == datos.indexOf(i)){
                 celda.setAttribute("colspan", "2");
+                celda.setAttribute("class", "selected");
+                let parrafo = document.getElementById("idCualExperiencia");
+                parrafo.innerHTML = ""; 
+                parrafo.innerHTML = "Experiencia: " + i.titulo;
+                miSistemas.asignarValorTitulo(i);
             }
+            //pintarUltimaExperiencia(i,celda)
             celda.innerHTML = i.titulo + "<br>";
             celda.appendChild(desc);
             celda.innerHTML += "<br>"+ "$" + i.precio;
             celda.appendChild(img);
             celda.addEventListener("click", 
             function () {
-                if (document.getElementsByClassName("celdaTabla")[0] != undefined) {
-                    document.getElementsByClassName("celdaTabla")[0].setAttribute("class","");
-                    celda.setAttribute("class", "celdaTabla");
+                if (document.getElementsByClassName("selected")[0] != undefined) {
+                    document.getElementsByClassName("selected")[0].setAttribute("class","");
+                    celda.setAttribute("class", "selected");
                     let parrafo = document.getElementById("idCualExperiencia");
                     parrafo.innerHTML = ""; 
                     parrafo.innerHTML = "Experiencia: " + i.titulo;
                     habilitarBotonCompra();
                     miSistemas.asignarValorTitulo(i);
                 }else {
-                    celda.setAttribute("class", "celdaTabla");
+                    celda.setAttribute("class", "selected");
                     let parrafo = document.getElementById("idCualExperiencia");
                     parrafo.innerHTML = ""; 
                     parrafo.innerHTML = "Experiencia: " + i.titulo;
@@ -187,18 +192,26 @@ function crearTabla() {
             celda2.appendChild(desc);
             celda2.innerHTML += "<br>"+ "$" + i.precio + "<br>";
             celda2.appendChild(img);
+            //pintarUltimaExperiencia(i,celda2)
+            if (datos.length-1 == datos.indexOf(i)){
+                celda2.setAttribute("class", "selected");
+                let parrafo = document.getElementById("idCualExperiencia");
+                parrafo.innerHTML = ""; 
+                parrafo.innerHTML = "Experiencia: " + i.titulo;
+                miSistemas.asignarValorTitulo(i);
+            }
             celda2.addEventListener("click", 
             function () {
-                if (document.getElementsByClassName("celdaTabla") != undefined) {
-                    document.getElementsByClassName("celdaTabla")[0].setAttribute("class","");
-                    celda2.setAttribute("class", "celdaTabla");
+                if (document.getElementsByClassName("selected") != undefined) {
+                    document.getElementsByClassName("selected")[0].setAttribute("class","");
+                    celda2.setAttribute("class", "selected");
                     let parrafo = document.getElementById("idCualExperiencia");
                     parrafo.innerHTML = ""; 
                     parrafo.innerHTML = "Experiencia: " + i.titulo;
                     habilitarBotonCompra();
                     miSistemas.asignarValorTitulo(i);
                 }else {
-                    celda2.setAttribute("class", "celdaTabla");
+                    celda2.setAttribute("class", "selected");
                     let parrafo = document.getElementById("idCualExperiencia");
                     parrafo.innerHTML = ""; 
                     parrafo.innerHTML = "Experiencia: " + i.titulo;
@@ -212,7 +225,9 @@ function crearTabla() {
 }
 
 function crearListaCompras(){
-    if (miSistemas.darCategoria().length != 0) {
+    let listaCompras = miSistemas.darCompra();
+    let categoria = document.getElementById("idComboCategoriasIzquierda").selectedIndex;
+    if (miSistemas.filtrarCategoriaCompra(categoria, listaCompras) != 0) {
         let parrafo_categoria = document.getElementById("idDetallesCualCategoria");
         parrafo_categoria.innerHTML = "Información detallada de la categoría " + miSistemas.encontrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex).nombre;
     }else {
@@ -351,3 +366,15 @@ function crearListaExpMasCompradas(){
         cuerpo_lista.appendChild(addNodo("li", texto))
     }
 }
+ /*function pintarUltimaExperiencia(experienciaCel, celda){
+    let ultPosicion = miSistemas.darExperiencia().length - 1;
+    if (experienciaCel.titulo == miSistemas.encontrarExperiencia(ultPosicion).titulo) {
+        celda.setAttribute("class", "selected")
+        let parrafo = document.getElementById("idCualExperiencia");
+        parrafo.innerHTML = ""; 
+        parrafo.innerHTML = "Experiencia: " + experienciaCel.titulo;
+        miSistemas.asignarValorTitulo(experienciaCel);
+    } else {
+        celda.setAttribute("class", "")
+    }
+}*/

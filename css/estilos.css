@@ -5,9 +5,6 @@ header{
 .detallesTabla {
 	font-style: italic;
 }
-.celdaTabla {
-	background-color: orange;
-}
 .selected {
 	background-color: #f2b705;
 }
