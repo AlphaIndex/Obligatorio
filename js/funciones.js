@@ -1,5 +1,5 @@
 // Funciones  - obligatorio 2do semestre 2023
-//Guillermo Soanes y Danna Gonzales
+//Guillermo Soanes y Danna Gonzalez
 window.addEventListener("load", inicio);
 let miSistemas = new Sistema();
 
@@ -20,7 +20,7 @@ function agregarCategorias() {
     if (form.reportValidity()) { //Valida que el formulario este completo
         let cat_nombre = document.getElementById("idNombreCategoria").value;
         let cat_detalles = document.getElementById("idDetallesCategoria").value;
-        if (validarUnicidad("nombre", cat_nombre)) {
+        if (validarUnicidad("nombre", cat_nombre)) { 
             let categoria = new Categoria(cat_nombre, cat_detalles);
             miSistemas.nuevaCategoria(categoria);
             mostrarCategoria();
@@ -40,7 +40,7 @@ function agregarExperiencia() {
         let exp_descripcion = document.getElementById("idDescripcionExperiencia").value;
         let exp_precio = document.getElementById("idPrecioExperiencia").value;
         let exp_cantidad = document.getElementById("idCantidadPersonasExperiencia").selectedIndex;
-        let exp_categoria = miSistemas.encontrarCategoria(document.getElementById("idCategoriaExperiencia").selectedIndex);
+        let exp_categoria = miSistemas.encontrarCategoria(document.getElementById("idCategoriaExperiencia").selectedIndex);//devuelve el objeto categoria para luego incluir en la nueva experiencia 
         if (validarUnicidad("titulo", exp_titulo)) {
             let exp = new Experiencias (exp_titulo, exp_descripcion, exp_precio, exp_cantidad, exp_categoria);
             miSistemas.nuevaExperiencia(exp);
@@ -61,7 +61,7 @@ function agregarCompra() {
     if (form.reportValidity()){
         let com_nombre = document.getElementById("idNombreComprador").value;
         let com_mail = document.getElementById("idMail").value; 
-        let com_experiencia = miSistemas.darNombreExperiencia();
+        let com_experiencia = miSistemas.darNombreExperiencia();//devuelve el objeto experiencia para luego incluir en la nueva compra
         let com_fecha = crearFecha();
         let compra = new Compra (com_nombre, com_mail, com_experiencia, com_fecha);
         miSistemas.nuevaCompra(compra);
@@ -79,7 +79,7 @@ function mostrarCategoria() {
     cateAlta.innerHTML = "";
     cateBaja.innerHTML = "";
     cateExp.innerHTML = "";
-    let datos = miSistemas.darCategoria();
+    let datos = miSistemas.darCategoria(); //
     for(let i of datos) {
         cateAlta.appendChild(addNodo("option", i.nombre));
         cateBaja.appendChild(addNodo("option", i.nombre));
