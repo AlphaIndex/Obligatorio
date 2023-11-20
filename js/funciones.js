@@ -228,7 +228,7 @@ function crearTabla() {
 function crearListaCompras(){
     let listaCompras = miSistemas.darCompra();
     let categoria = document.getElementById("idComboCategoriasIzquierda").selectedIndex;
-    if (miSistemas.filtrarCategoriaCompra(categoria, listaCompras) != 0) {
+    if (miSistemas.filtrarCategoriaCompra(categoria, listaCompras).length != 0) {
         let parrafo_categoria = document.getElementById("idDetallesCualCategoria");
         parrafo_categoria.innerHTML = "Información detallada de la categoría " + miSistemas.encontrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex).nombre;
     }else {
