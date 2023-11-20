@@ -79,7 +79,7 @@ function mostrarCategoria() {
     cateAlta.innerHTML = "";
     cateBaja.innerHTML = "";
     cateExp.innerHTML = "";
-    let datos = miSistemas.darCategoria(); //
+    let datos = miSistemas.darCategoria();
     for(let i of datos) {
         cateAlta.appendChild(addNodo("option", i.nombre));
         cateBaja.appendChild(addNodo("option", i.nombre));
