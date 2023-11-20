@@ -1,4 +1,5 @@
 // Oblig 2do semestre 2023 - Clases
+//Guillermo Soanes y Danna Gonzales
 class Sistema {
     constructor () {
         this.list_categorias = [];

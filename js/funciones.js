@@ -1,4 +1,5 @@
 // Funciones  - obligatorio 2do semestre 2023
+//Guillermo Soanes y Danna Gonzales
 window.addEventListener("load", inicio);
 let miSistemas = new Sistema();
 
@@ -16,7 +17,7 @@ function inicio () {
 
 function agregarCategorias() {
     let form = document.getElementById("idFormCategoria");
-    if (form.reportValidity()) {
+    if (form.reportValidity()) { //Valida que el formulario este completo
         let cat_nombre = document.getElementById("idNombreCategoria").value;
         let cat_detalles = document.getElementById("idDetallesCategoria").value;
         if (validarUnicidad("nombre", cat_nombre)) {
@@ -96,9 +97,9 @@ function mostrarExperiencia() {
 }
 
 function addNodo(tipo, texto) {
-    let nodo = document.createElement(tipo);
-    let nodoT = document.createTextNode(texto);
-    nodo.appendChild(nodoT);
+    let nodo = document.createElement(tipo);//crea una etiqueta 
+    let nodoT = document.createTextNode(texto);//crea un nodo de texto
+    nodo.appendChild(nodoT);//mete el texto dentro de la etiqueta
     nodo.value = texto;
     return nodo;
 }
@@ -116,8 +117,8 @@ function eliminarCategoria() {
 }
 
 function eliminarExperiencias() {
-    let exp = document.getElementById("idComboBajaExperiencia").selectedIndex;
-    if (miSistemas.verificarExistenciaComp(exp)) {
+    let exp = document.getElementById("idComboBajaExperiencia").selectedIndex;//consigue la posiscion de la experiencia
+    if (miSistemas.verificarExistenciaComp(exp)) {//Verifica que si existe una compra con esa expriencia
         miSistemas.eliminarExperiencias(exp);
         mostrarCategoria();
         habilitarBotonCategoria();
@@ -141,14 +142,14 @@ function crearTabla() {
     let tabla = document.getElementById("idTabla");
     tabla.innerHTML = "";
     let datos = reordenarExp();
-    datos = miSistemas.filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);
+    datos = miSistemas.filtrarCategoria(document.getElementById("idComboCategoriasIzquierda").selectedIndex,datos);//Filtra las experiencias por categoria
     if (document.getElementById("idCantidadPersonasCategoria").selectedIndex != 0) {
-        datos = miSistemas.filtrarCantidadP(document.getElementById("idCantidadPersonasCategoria").selectedIndex - 1,datos);
+        datos = miSistemas.filtrarCantidadP(document.getElementById("idCantidadPersonasCategoria").selectedIndex - 1,datos);//Filtra por cantidad de personas
     }
     let fila;
     for (let i of datos) {
-        let desc = addNodo("span", i.descripcion);
-        desc.setAttribute("class", "detallesTabla");
+        let desc = addNodo("span", i.descripcion); //Crea un nodo span con la descripcion
+        desc.setAttribute("class", "detallesTabla");//Le crea una clase al span para que esten en italica
         let img = selectImg(i.cantidad);
         if (((datos.indexOf(i)+1)%2) != 0) {
             fila = tabla.insertRow();
@@ -272,13 +273,13 @@ function validarUnicidad(tipo, valor) {
 
 function selectImg(cantidad){
     let img;
-    if (cantidad == 0) {
+    if (cantidad == 0) {//Si la posicio es 0 es la imagen de una persona
         img = document.createElement("img");
         img.setAttribute("src", "img/uno.png"); 
-    } else if(cantidad == 1){
+    } else if(cantidad == 1){//Si la posicio es 1 es la imagen de dos persona
         img = document.createElement("img");
         img.setAttribute("src", "img/dos.png");
-    }else {
+    }else { //Si la posicio es mayor a 1 es la imagen de mas de dos personas
         img = document.createElement("img");
         img.setAttribute("src", "img/muchos.png");
     }
@@ -296,12 +297,12 @@ function reordenarExp(){
 }
 
 function habilitarBotonCategoria(){
-if (miSistemas.list_categorias.length == 0) {
-    document.getElementById("idBotonBajaCategoria").disabled = true;
+if (miSistemas.list_categorias.length == 0) {//Habilita el boton dependiendo si existen categorias 
+    document.getElementById("idBotonBajaCategoria").disabled = true; //Deshabilita el boton de bajas categorias
     document.getElementById("idBotonAltaExperiencia").disabled = true;
 
 }else {
-    document.getElementById("idBotonBajaCategoria").disabled = false;
+    document.getElementById("idBotonBajaCategoria").disabled = false; //Habilita el boton de bajas categorias
     document.getElementById("idBotonAltaExperiencia").disabled = false;
 }
 }
@@ -327,12 +328,12 @@ function crearFecha() {
     let hora = hoy.getHours();
     let min = hoy.getMinutes();
     if(min<10){
-	    min = "0" + min;
+	    min = "0" + min;//Si los minutos son menores a 10 le concatena un 0 a la izquierda
     }
     if(hora<10){
         hora = "0" + hora;
     }
-    let ret = hoy.toLocaleDateString() + " Hora " + hora + ":" + min;
+    let ret = hoy.toLocaleDateString() + " Hora " + hora + ":" + min; //Pasa la fecha a formato d/m/a y concatena la hora
     return ret;
 }
 
